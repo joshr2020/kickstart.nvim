@@ -3,14 +3,23 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  'ledger/vim-ledger',
+  {
+    'ledger/vim-ledger',
+    config = function()
+      vim.keymap.set('n', '<leader>lc', ":call ledger#transaction_state_toggle(line('.'), ' *')<CR>", { silent = true, desc = '[L]edger [C]lear' })
+      vim.keymap.set('n', '<leader>la', ':LedgerAlign<CR>', { silent = true, desc = '[L]edger [A]lign' })
+    end,
+  },
   {
     'axkirillov/easypick.nvim',
+    ft = 'ledger',
     requires = 'nvim-telescope/telescope.nvim',
     config = function() -- This is the function that runs, AFTER loading
+      -- setup pickers
       local actions = require 'telescope.actions'
       local action_state = require 'telescope.actions.state'
-      require('easypick').setup {
+      local easypick = require 'easypick'
+      easypick.setup {
         pickers = {
           {
             name = 'accounts',
@@ -38,6 +47,10 @@ return {
           },
         },
       }
+
+      -- setup keymaps for easypick telescope
+      vim.keymap.set('n', '<leader>sp', ':Easypick descriptions<CR>', { silent = true, desc = '[S]earch [P]ayees' })
+      vim.keymap.set('n', '<leader>sa', ':Easypick accounts<CR>', { silent = true, desc = '[S]earch [A]ccounts' })
     end,
   },
 }
