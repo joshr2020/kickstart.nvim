@@ -204,6 +204,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  desc = 'norg files',
+  pattern = '*.norg',
+  group = vim.api.nvim_create_augroup('custom-norg', { clear = true }),
+  callback = function()
+    vim.opt_local.foldlevelstart = 99
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -824,6 +833,13 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
+      -- autopairs
+      require('mini.pairs').setup()
+
+      -- file manager
+      require('mini.files').setup()
+
+      vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Open mini.files' })
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
@@ -847,7 +863,23 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'ledger', 'fish', 'haskell' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'ledger',
+        'fish',
+        'haskell',
+        'norg',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
