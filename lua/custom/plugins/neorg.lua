@@ -13,8 +13,9 @@ return {
         ['core.dirman'] = {
           config = {
             workspaces = {
-              work = '~/notes', -- Format: <name_of_workspace> = <path_to_workspace_root>
+              notes = '~/notes', -- Format: <name_of_workspace> = <path_to_workspace_root>
             },
+            default_workspace = 'notes',
           },
         },
       },
