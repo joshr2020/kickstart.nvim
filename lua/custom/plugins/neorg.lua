@@ -9,6 +9,7 @@ return {
         ['core.defaults'] = {},
         ['core.qol.todo_items'] = {},
         ['core.concealer'] = {},
+        ['core.summary'] = {},
         ['core.dirman'] = {
           config = {
             workspaces = {

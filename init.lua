@@ -840,6 +840,8 @@ require('lazy').setup({
       require('mini.files').setup()
 
       vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Open mini.files' })
+
+      require('mini.bracketed').setup()
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
@@ -879,6 +881,7 @@ require('lazy').setup({
         'fish',
         'haskell',
         'norg',
+        'norg_meta',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
