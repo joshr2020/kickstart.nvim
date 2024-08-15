@@ -204,15 +204,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-  desc = 'norg files',
-  pattern = '*.norg',
-  group = vim.api.nvim_create_augroup('custom-norg', { clear = true }),
-  callback = function()
-    vim.opt_local.foldlevelstart = 99
-  end,
-})
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -329,7 +320,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      -- { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -838,6 +829,10 @@ require('lazy').setup({
 
       -- file manager
       require('mini.files').setup()
+
+      require('mini.icons').setup()
+
+      require('mini.tabline').setup()
 
       vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Open mini.files' })
 
