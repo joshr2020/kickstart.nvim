@@ -8,6 +8,11 @@ return {
     config = function()
       vim.keymap.set('n', '<leader>lc', ":call ledger#transaction_state_toggle(line('.'), ' *')<CR>", { silent = true, desc = '[L]edger [C]lear' })
       vim.keymap.set('n', '<leader>la', ':LedgerAlign<CR>', { silent = true, desc = '[L]edger [A]lign' })
+
+      -- Insert today date
+      vim.keymap.set('n', '<leader>ld', function()
+        return '<Cmd>r! date -v -' .. vim.v.count .. 'd "+\\%Y-\\%m-\\%d" <CR>'
+      end, { expr = true, silent = true, desc = 'Insert date' })
     end,
   },
   {
